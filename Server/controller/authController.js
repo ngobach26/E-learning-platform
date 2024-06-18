@@ -8,25 +8,10 @@ const createToken = (_id) => {
     return jwt.sign({ _id }, JWT_SECRET, { expiresIn: "3d" });
 };
 
-
 // Login route
-const login = async(req, res) => {
+const login = async (req, res) => {
     try {
         const { _id, firstName, lastName, email, role } = await User.login(req.body);
-
-        // Create token
-        const token = createToken(_id);
-
-        res.status(200).json({ _id, firstName, lastName, email, token, role});
-    } catch (err) {
-        res.status(400).json({ error: err.message });
-    }
-};
-
-// Signup route
-const signup =  async (req, res) => {
-    try {
-        const { _id, firstName, lastName, email, role} = await User.signup(req.body);
 
         // Create token
         const token = createToken(_id);
@@ -36,4 +21,19 @@ const signup =  async (req, res) => {
         res.status(400).json({ error: err.message });
     }
 };
-module.exports = {login,signup};
+
+// Signup route
+const signup = async (req, res) => {
+    try {
+        const { _id, firstName, lastName, email, role } = await User.signup(req.body);
+
+        // Create token
+        const token = createToken(_id);
+
+        res.status(200).json({ _id, firstName, lastName, email, token, role });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+};
+
+module.exports = { login, signup };

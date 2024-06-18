@@ -143,8 +143,6 @@ userSchema.statics.login = async function (data) {
 
 userSchema.statics.getprofile = async function (data) {
     const {firstName, lastName, currentjob, introduction, website, facebook, twitter, linkedin} = data;
-
-
 }
 
 userSchema.statics.updateprofile = async function (userId, data) {
